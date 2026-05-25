@@ -397,3 +397,11 @@ open design/index.html
 - **后端**: Go, Beego v2, Beego ORM, MySQL 8, Redis（队列/计数）, JWT
 - **前端**: React, TypeScript, Vite, Ant Design, TanStack Query, Zustand
 - **存储**: 本地 `backend/storage/`（MVP；MinIO 容器已预留）
+
+## 联系方式
+
+| | |
+|---|---|
+| **联系人** | Tim Lu |
+| **电话** | 15651616552 |
+| **邮箱** | [tim.lu@lianwei.com.cn](mailto:tim.lu@lianwei.com.cn) |
