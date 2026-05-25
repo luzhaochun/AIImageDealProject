@@ -7,7 +7,7 @@
 
 **SaaS 图片协作平台** + **GPT 智能消除工作室** — CSV 批量入库、多角色领图作图与审核归档，管理端支持 Konva 蒙版 + OpenAI 图像消除 + PSD 导出。
 
-*English summary → [README.en.md](README.en.md)*
+*English → [README.en.md](README.en.md)（full translation）*
 
 ---
 
