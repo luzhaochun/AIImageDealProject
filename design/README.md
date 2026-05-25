@@ -14,6 +14,12 @@ open design/index.html
 
 ## 页面清单
 
+### 产品与流程（1 屏）
+
+| 页面 | 文件 | 说明 |
+|------|------|------|
+| 业务全流程（13 步） | `pages/workflow-overview.html` | ImageDeal 自有流程说明，导出 README 配图 |
+
 ### 公共（3 屏）
 
 | 页面 | 文件 | 说明 |

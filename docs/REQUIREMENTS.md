@@ -20,7 +20,10 @@
 
 ## 业务流程总图（13 步）
 
-![SaaS 图片协作平台 — 业务全流程](images/business-workflow.jpg)
+![ImageDeal 业务全流程](images/business-workflow.png)
+
+> 流程图为 **ImageDeal 项目自有** 产品说明，源码可编辑：`design/pages/workflow-overview.html`。  
+> 重新导出配图：`bash scripts/capture-design-screenshots.sh`（或仅流程图见脚本末尾）。
 
 ## 13 步需求明细
 

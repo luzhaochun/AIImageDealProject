@@ -112,9 +112,9 @@ openai_image_model = gpt-image-2
 
 ## 团队协作流程
 
-13 步业务闭环：**导入 → 入库 → 分类 → 领图 → 作图 → 提审 → 审核 → 归档**。
+13 步业务闭环：**导入 → 入库 → 分类 → 领图 → 作图 → 提审 → 审核 → 归档**（ImageDeal 自有流程说明）。
 
-![业务全流程](docs/images/business-workflow.jpg)
+![ImageDeal 业务全流程](docs/images/business-workflow.png)
 
 | 步骤 | 角色 | 要点 |
 |:---:|------|------|

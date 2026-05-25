@@ -28,6 +28,8 @@ capture pages/workspace-claim.html workspace-claim
 capture pages/workspace-tasks.html workspace-tasks
 capture pages/workspace-editor.html workspace-editor
 capture pages/review-first.html review-first
-capture pages/review-second.html review-second
 capture pages/review-compare.html review-compare
-echo "Done: $(ls "$OUT" | wc -l) files"
+capture pages/workflow-overview.html workflow-overview
+echo "Exporting README workflow image..."
+npx -y playwright screenshot "$BASE/pages/workflow-overview.html" "$ROOT/docs/images/business-workflow.png" --full-page --viewport-size=1400,900 --wait-for-timeout=500
+echo "Done: $(ls "$OUT" | wc -l) design files + business-workflow.png"
