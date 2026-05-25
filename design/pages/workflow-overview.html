@@ -4,212 +4,210 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ImageDeal — 业务全流程</title>
-  <link rel="stylesheet" href="../css/design-system.css" />
   <style>
-    body { background: #f1f5f9; padding: 32px; }
-    .wrap { max-width: 1280px; margin: 0 auto; }
-    .hero {
-      background: linear-gradient(135deg, #1e40af 0%, #2563eb 55%, #3b82f6 100%);
-      color: #fff; border-radius: 12px; padding: 28px 32px; margin-bottom: 20px;
-      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.25);
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: #fff;
+      padding: 24px;
+      color: #1e293b;
     }
-    .hero h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
-    .hero h1 span { opacity: 0.92; font-weight: 600; }
-    .hero p { font-size: 14px; opacity: 0.9; max-width: 720px; line-height: 1.6; }
-    .hero-meta { margin-top: 14px; font-size: 12px; opacity: 0.75; }
-    .flow-strip {
-      display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
-      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
-      padding: 14px 18px; margin-bottom: 18px;
+    .sheet {
+      max-width: 1560px;
+      margin: 0 auto;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
     }
-    .flow-chip {
-      background: var(--primary-light); color: var(--primary); font-size: 12px; font-weight: 600;
-      padding: 4px 10px; border-radius: 999px; white-space: nowrap;
+    .title-bar {
+      background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 100%);
+      color: #fff;
+      text-align: center;
+      padding: 18px 24px;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
     }
-    .flow-arrow { color: var(--text-secondary); font-size: 12px; }
-    .table-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-      overflow: hidden; box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    .title-bar span { font-weight: 800; }
+    .subtitle {
+      background: #eff6ff;
+      border-bottom: 1px solid #bfdbfe;
+      padding: 10px 20px;
+      font-size: 13px;
+      color: #1e40af;
+      text-align: center;
     }
-  table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      line-height: 1.55;
+    }
     thead th {
-      background: #1e293b; color: #f8fafc; text-align: left; padding: 12px 10px;
-      font-weight: 600; font-size: 12px; border-bottom: 2px solid #334155;
+      background: #1e40af;
+      color: #fff;
+      font-weight: 600;
+      text-align: center;
+      padding: 12px 10px;
+      border: 1px solid #1e3a8a;
+      font-size: 14px;
     }
     tbody td {
-      padding: 10px; border-bottom: 1px solid var(--border); vertical-align: top;
-      line-height: 1.45; color: var(--text);
+      border: 1px solid #cbd5e1;
+      padding: 10px 12px;
+      vertical-align: middle;
     }
-    tbody tr:nth-child(even) { background: #f8fafc; }
-    tbody tr:hover { background: #eff6ff; }
-    .step-num {
-      display: inline-flex; align-items: center; justify-content: center;
-      min-width: 28px; height: 28px; border-radius: 8px; background: var(--primary);
-      color: #fff; font-weight: 700; font-size: 12px;
+    tbody tr:nth-child(odd) { background: #f0f9ff; }
+    tbody tr:nth-child(even) { background: #ffffff; }
+    .step {
+      font-weight: 700;
+      color: #1e40af;
+      white-space: nowrap;
+      text-align: center;
+      width: 88px;
     }
-    .step-name { font-weight: 600; margin-top: 4px; color: #1e293b; }
-    .role {
-      display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 600;
-    }
-    .role-admin { background: #fef3c7; color: #92400e; }
-    .role-system { background: #e0e7ff; color: #3730a3; }
-    .role-user { background: #dcfce7; color: #166534; }
-    .role-reviewer { background: #fce7f3; color: #9d174d; }
-    .lib { font-size: 11.5px; color: var(--text-secondary); }
-    code { font-size: 11px; background: #f1f5f9; padding: 1px 4px; border-radius: 4px; }
-    .footer-note {
-      margin-top: 16px; font-size: 12px; color: var(--text-secondary); text-align: center;
+    .role { text-align: center; width: 72px; font-weight: 600; }
+    .role-admin { color: #b45309; }
+    .role-system { color: #4338ca; }
+    .role-user { color: #15803d; }
+    .role-reviewer { color: #be185d; }
+    .lib { color: #475569; font-size: 12.5px; }
+    .footer {
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      padding: 10px 16px;
+      font-size: 11px;
+      color: #64748b;
+      text-align: right;
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="hero">
-      <h1>Image<span>Deal</span> · 图片协作业务全流程</h1>
-      <p>
-        本图描述 ImageDeal 平台内置的 13 步图片生产闭环：从 CSV 批量导入与自动入库，
-        到用户领图作图、一审/二审质检，直至终稿归档导出。逻辑图库由状态机驱动，与系统实现一一对应。
-      </p>
-      <div class="hero-meta">ImageDeal Project · 产品需求说明</div>
-    </div>
+  <div class="sheet">
+    <div class="title-bar">Image<span>Deal</span> 图片协作平台 — 业务全流程</div>
+    <div class="subtitle">13 步图片生产闭环 · CSV 导入 → 领图作图 → 一审/二审 → 终稿归档 · ImageDeal 项目产品说明</div>
 
-    <div class="flow-strip">
-      <span class="flow-chip">1 导入</span><span class="flow-arrow">→</span>
-      <span class="flow-chip">2 入库</span><span class="flow-arrow">→</span>
-      <span class="flow-chip">3 分类</span><span class="flow-arrow">→</span>
-      <span class="flow-chip">4 领图</span><span class="flow-arrow">→</span>
-      <span class="flow-chip">5 换图</span><span class="flow-arrow">→</span>
-      <span class="flow-chip">6 作图</span><span class="flow-arrow">→</span>
-      <span class="flow-chip">7 提审</span><span class="flow-arrow">→</span>
-      <span class="flow-chip">8–10 一审</span><span class="flow-arrow">→</span>
-      <span class="flow-chip">11–12 二审</span><span class="flow-arrow">→</span>
-      <span class="flow-chip">13 归档</span>
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>步骤</th>
+          <th>操作人</th>
+          <th>操作</th>
+          <th>系统行为</th>
+          <th>数据 / 状态变更</th>
+          <th>图库归属</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="step">1-导入</td>
+          <td class="role role-admin">管理员</td>
+          <td>上传 CSV 文件</td>
+          <td>解析 CSV → 读取图片下载链接 → 批量下载原图</td>
+          <td>image_urls 写入 images 表</td>
+          <td class="lib">—</td>
+        </tr>
+        <tr>
+          <td class="step">2-入库</td>
+          <td class="role role-system">系统</td>
+          <td>自动下载图片</td>
+          <td>逐一下载 → 校验格式/尺寸 → 生成缩略图</td>
+          <td>images 表插入 N 条记录</td>
+          <td class="lib">原始图库（待分配）</td>
+        </tr>
+        <tr>
+          <td class="step">3-分类</td>
+          <td class="role role-system">系统</td>
+          <td>按 CSV 类别归类</td>
+          <td>CSV 的 category 字段写入图片元数据</td>
+          <td>images.category 填充</td>
+          <td class="lib">原始图库（按类别分好）</td>
+        </tr>
+        <tr>
+          <td class="step">4-领图</td>
+          <td class="role role-user">用户</td>
+          <td>选类别 → 领一张图</td>
+          <td>从该类待分配图库取 1 张，分配全局唯一编号</td>
+          <td>status=已分配，assigned_to=用户，生成 global_no</td>
+          <td class="lib">原始图库 → 已领出</td>
+        </tr>
+        <tr>
+          <td class="step">5-换图</td>
+          <td class="role role-user">用户</td>
+          <td>评估后认为不可用</td>
+          <td>当前图 → 废图堆；用户重新领图</td>
+          <td>原图 status=废弃，重新走步骤 4</td>
+          <td class="lib">已领出 → 废图堆</td>
+        </tr>
+        <tr>
+          <td class="step">6-作图</td>
+          <td class="role role-user">用户</td>
+          <td>在线编辑图片</td>
+          <td>图层 / 裁剪 / 调色 / 文字等操作，随时保存</td>
+          <td>创建 image_versions + image_layers</td>
+          <td class="lib">工作中（用户任务区）</td>
+        </tr>
+        <tr>
+          <td class="step">7-提审</td>
+          <td class="role role-user">用户</td>
+          <td>作图完成 → 提交一审</td>
+          <td>图片进入一审审核队列</td>
+          <td>status=一审待审</td>
+          <td class="lib">用户任务区 → 一审待审队列</td>
+        </tr>
+        <tr>
+          <td class="step">8-一审</td>
+          <td class="role role-reviewer">审核员</td>
+          <td>审核图片</td>
+          <td>对比原图审核 → 通过 / 驳回 / 打回</td>
+          <td>创建 review_records 记录</td>
+          <td class="lib">一审队列</td>
+        </tr>
+        <tr>
+          <td class="step">9-一审通过</td>
+          <td class="role role-system">系统</td>
+          <td>审核通过</td>
+          <td>图片进入「一审通过图库」</td>
+          <td>status=一审通过</td>
+          <td class="lib">一审通过图库</td>
+        </tr>
+        <tr>
+          <td class="step">10-一审驳回</td>
+          <td class="role role-reviewer">审核员</td>
+          <td>审核不通过</td>
+          <td>退回给用户，附修改意见</td>
+          <td>status=驳回，用户重新编辑</td>
+          <td class="lib">退回用户任务区</td>
+        </tr>
+        <tr>
+          <td class="step">11-二审</td>
+          <td class="role role-reviewer">审核员</td>
+          <td>从一审通过库领图审核（可选）</td>
+          <td>从一审通过图库中抽取进行二审</td>
+          <td>status=二审待审</td>
+          <td class="lib">一审通过图库 → 二审队列</td>
+        </tr>
+        <tr>
+          <td class="step">12-二审通过</td>
+          <td class="role role-system">系统</td>
+          <td>二审通过</td>
+          <td>进入「二审通过图库」（终稿库）</td>
+          <td>status=二审通过</td>
+          <td class="lib">二审通过图库（终稿）</td>
+        </tr>
+        <tr>
+          <td class="step">13-终稿归档</td>
+          <td class="role role-system">系统</td>
+          <td>终稿标记</td>
+          <td>完成的图片可导出 / 打包</td>
+          <td>status=已完成</td>
+          <td class="lib">终稿归档库</td>
+        </tr>
+      </tbody>
+    </table>
 
-    <div class="table-card">
-      <table>
-        <thead>
-          <tr>
-            <th style="width:72px">步骤</th>
-            <th style="width:72px">操作人</th>
-            <th style="width:11%">操作</th>
-            <th style="width:22%">系统行为</th>
-            <th style="width:22%">数据 / 状态变更</th>
-            <th style="width:16%">图库归属</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="step-num">1</span><div class="step-name">导入</div></td>
-            <td><span class="role role-admin">管理员</span></td>
-            <td>上传 CSV</td>
-            <td>解析 CSV，读取图片下载链接，触发批量下载任务</td>
-            <td><code>images</code> 写入 URL，<code>status=pending_storage</code></td>
-            <td class="lib">—</td>
-          </tr>
-          <tr>
-            <td><span class="step-num">2</span><div class="step-name">入库</div></td>
-            <td><span class="role role-system">系统</span></td>
-            <td>自动下载</td>
-            <td>逐张下载、校验格式/尺寸、生成缩略图</td>
-            <td>插入 N 条 <code>images</code> 记录</td>
-            <td class="lib">原始图库（待分配）</td>
-          </tr>
-          <tr>
-            <td><span class="step-num">3</span><div class="step-name">分类</div></td>
-            <td><span class="role role-system">系统</span></td>
-            <td>按 CSV 分类</td>
-            <td>将 CSV 类目写入图片元数据</td>
-            <td>填充 <code>images.category</code></td>
-            <td class="lib">原始图库（已分类）</td>
-          </tr>
-          <tr>
-            <td><span class="step-num">4</span><div class="step-name">领图</div></td>
-            <td><span class="role role-user">用户</span></td>
-            <td>选类目领取 1 张</td>
-            <td>从待分配库取图，分配全局唯一编号</td>
-            <td><code>status=assigned</code>，<code>assigned_to</code>，<code>global_no</code></td>
-            <td class="lib">原图库 → 已领出</td>
-          </tr>
-          <tr>
-            <td><span class="step-num">5</span><div class="step-name">换图</div></td>
-            <td><span class="role role-user">用户</span></td>
-            <td>评估后不可用</td>
-            <td>当前图入废料堆，用户重新领图</td>
-            <td><code>status=discarded</code>，重复步骤 4</td>
-            <td class="lib">已领出 → 废图堆</td>
-          </tr>
-          <tr>
-            <td><span class="step-num">6</span><div class="step-name">作图</div></td>
-            <td><span class="role role-user">用户</span></td>
-            <td>在线编辑</td>
-            <td>图层 / 裁剪 / 调色 / 文字，自动保存版本</td>
-            <td><code>image_versions</code> + <code>image_layers</code></td>
-            <td class="lib">用户任务区（作图中）</td>
-          </tr>
-          <tr>
-            <td><span class="step-num">7</span><div class="step-name">提审</div></td>
-            <td><span class="role role-user">用户</span></td>
-            <td>提交一审</td>
-            <td>图片进入一审待审队列</td>
-            <td><code>status=pending_1st_review</code></td>
-            <td class="lib">任务区 → 一审队列</td>
-          </tr>
-          <tr>
-            <td><span class="step-num">8</span><div class="step-name">一审</div></td>
-            <td><span class="role role-reviewer">审核员</span></td>
-            <td>审核对比</td>
-            <td>原图 vs 成稿，通过 / 驳回 / 打回</td>
-            <td>写入 <code>review_records</code></td>
-            <td class="lib">一审队列</td>
-          </tr>
-          <tr>
-            <td><span class="step-num">9</span><div class="step-name">一审通过</div></td>
-            <td><span class="role role-system">系统</span></td>
-            <td>审核通过</td>
-            <td>进入一审通过图库</td>
-            <td><code>status=1st_review_passed</code></td>
-            <td class="lib">一审通过库</td>
-          </tr>
-          <tr>
-            <td><span class="step-num">10</span><div class="step-name">一审驳回</div></td>
-            <td><span class="role role-reviewer">审核员</span></td>
-            <td>审核不通过</td>
-            <td>退回用户并附修改意见</td>
-            <td><code>status=rejected</code>，用户返工</td>
-            <td class="lib">退回用户任务区</td>
-          </tr>
-          <tr>
-            <td><span class="step-num">11</span><div class="step-name">二审</div></td>
-            <td><span class="role role-reviewer">审核员</span></td>
-            <td>领取二审（可选）</td>
-            <td>从一审通过库抽样或人工领取</td>
-            <td><code>status=pending_2nd_review</code></td>
-            <td class="lib">一审通过库 → 二审队列</td>
-          </tr>
-          <tr>
-            <td><span class="step-num">12</span><div class="step-name">二审通过</div></td>
-            <td><span class="role role-system">系统</span></td>
-            <td>二审通过</td>
-            <td>进入终稿图库</td>
-            <td><code>status=2nd_review_passed</code></td>
-            <td class="lib">二审通过库（终稿）</td>
-          </tr>
-          <tr>
-            <td><span class="step-num">13</span><div class="step-name">终稿归档</div></td>
-            <td><span class="role role-system">系统</span></td>
-            <td>终稿标记</td>
-            <td>已完成图可导出 / 打包</td>
-            <td><code>status=completed</code></td>
-            <td class="lib">终稿归档库</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <p class="footer-note">
-      © ImageDeal · 本流程图为项目自有产品说明 · 源码可编辑：<code>design/pages/workflow-overview.html</code>
-    </p>
+    <div class="footer">© ImageDeal Project · design/pages/workflow-overview.html</div>
   </div>
 </body>
 </html>

@@ -31,5 +31,5 @@ capture pages/review-first.html review-first
 capture pages/review-compare.html review-compare
 capture pages/workflow-overview.html workflow-overview
 echo "Exporting README workflow image..."
-npx -y playwright screenshot "$BASE/pages/workflow-overview.html" "$ROOT/docs/images/business-workflow.png" --full-page --viewport-size=1400,900 --wait-for-timeout=500
+npx -y playwright screenshot "$BASE/pages/workflow-overview.html" "$ROOT/docs/images/business-workflow.png" --full-page --viewport-size=1600,900 --wait-for-timeout=600
 echo "Done: $(ls "$OUT" | wc -l) design files + business-workflow.png"
