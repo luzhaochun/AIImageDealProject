@@ -95,7 +95,7 @@ openai_image_model = gpt-image-2
 
 技术细节：[docs/10-CANVAS-STUDIO.md](docs/10-CANVAS-STUDIO.md) · 旧版 Mock Demo：`/admin/ai-editor` · [docs/09-AI-EDITOR-DEMO.md](docs/09-AI-EDITOR-DEMO.md)
 
-<details>
+<details open>
 <summary><b>展开：更多 Demo 对比图</b></summary>
 
 **示例 1 — 消除 1 人 / 全部人物**
@@ -210,7 +210,7 @@ AIImageDealProject/
 | Workspace | 3 | `/workspace/claim` · `/workspace/tasks` |
 | Review | 3 | `/review/first` · `/review/:id` |
 
-<details>
+<details open>
 <summary><b>展开：UI 设计稿截图（14 屏静态稿 + Canvas 实机）</b></summary>
 
 #### 公共
