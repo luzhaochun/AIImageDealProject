@@ -111,4 +111,4 @@ bash scripts/capture-design-screenshots.sh
 
 ## 与实现的对应
 
-正式实现见 `frontend/`（React + Ant Design），API 见 `docs/05-API.md`，前端架构见 `docs/03-FRONTEND.md`。
+正式实现见 `frontend/`（React + Ant Design）。README 中含折叠截图预览；完整需求见 [docs/REQUIREMENTS.md](../docs/REQUIREMENTS.md)。

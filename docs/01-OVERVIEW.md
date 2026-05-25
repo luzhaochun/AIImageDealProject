@@ -143,6 +143,7 @@ Phase 3 (扩展)    拆 Import Service / Media Service；CDN；WebSocket 待办
 
 | 文档 | 内容 |
 |------|------|
+| [REQUIREMENTS.md](./REQUIREMENTS.md) | 13 步业务需求、图库、状态机对照 |
 | [02-BACKEND.md](./02-BACKEND.md) | 后端分层、模块、Worker、中间件 |
 | [03-FRONTEND.md](./03-FRONTEND.md) | 前端目录、路由、状态、页面设计 |
 | [04-DATABASE.md](./04-DATABASE.md) | ER 图、表结构、索引 |

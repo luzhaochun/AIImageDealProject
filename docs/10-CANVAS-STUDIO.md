@@ -2,7 +2,7 @@
 
 管理端：`/admin/canvas-studio`（本地 http://localhost:5173/admin/canvas-studio）
 
-**Demo 截图与功能说明**：见根目录 [README.md#canvas-studio](../README.md#canvas-studio)。
+**Demo 截图与功能说明**：见根目录 [README.md#ai-图像消除](../README.md#ai-图像消除)。
 
 ## 技术栈
 
