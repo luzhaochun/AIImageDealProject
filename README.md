@@ -376,6 +376,78 @@ open design/index.html
 | | 二审队列 | `pages/review-second.html` | `/review/second` | 从一审通过库领取二审 |
 | | 审核对比 | `pages/review-compare.html` | `/review/:id` | 原图 vs 成稿、通过/驳回 |
 
+### 设计截图
+
+以下为静态设计稿预览（1440px 全页截图）。本地可交互预览：`open design/index.html`。
+
+#### 公共
+
+**设计稿索引** · `design/index.html`
+
+![设计稿索引](docs/images/design/index.png)
+
+**登录** · `/login`
+
+![登录页](docs/images/design/login.png)
+
+**工作台首页** · `/`
+
+![工作台首页](docs/images/design/home.png)
+
+**403 无权限** · `/403`
+
+![403](docs/images/design/403.png)
+
+#### 管理员 Admin
+
+**CSV 导入** · `/admin/imports`
+
+![CSV 导入](docs/images/design/admin-import.png)
+
+**导入批次详情** · `/admin/imports/:id`
+
+![导入批次详情](docs/images/design/admin-import-detail.png)
+
+**终稿导出** · `/admin/archives`
+
+![终稿导出](docs/images/design/admin-archive.png)
+
+**AI 消除 Demo** · `/admin/ai-editor`
+
+![AI 消除 Demo](docs/images/design/admin-ai-editor.png)
+
+**GPT Canvas 工作室** · `/admin/canvas-studio`（React 实现，非静态稿）
+
+![GPT Canvas 工作室](docs/images/design/canvas-studio.png)
+
+#### 作图用户 Workspace
+
+**领图** · `/workspace/claim`
+
+![领图](docs/images/design/workspace-claim.png)
+
+**我的任务** · `/workspace/tasks`
+
+![我的任务](docs/images/design/workspace-tasks.png)
+
+**在线编辑器** · `/workspace/editor/:id`
+
+![在线编辑器](docs/images/design/workspace-editor.png)
+
+#### 审核员 Review
+
+**一审队列** · `/review/first`
+
+![一审队列](docs/images/design/review-first.png)
+
+**二审队列** · `/review/second`
+
+![二审队列](docs/images/design/review-second.png)
+
+**审核对比** · `/review/:id`
+
+![审核对比](docs/images/design/review-compare.png)
+
 ### 按业务流程对应
 
 ```

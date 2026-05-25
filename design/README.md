@@ -51,6 +51,36 @@ open design/index.html
 
 ---
 
+## 设计截图
+
+各页预览图已生成至 `docs/images/design/`（README 中可直接查看）：
+
+| 页面 | 截图 |
+|------|------|
+| 设计索引 | `docs/images/design/index.png` |
+| 登录 | `docs/images/design/login.png` |
+| 工作台首页 | `docs/images/design/home.png` |
+| 403 | `docs/images/design/403.png` |
+| CSV 导入 | `docs/images/design/admin-import.png` |
+| 导入批次详情 | `docs/images/design/admin-import-detail.png` |
+| 终稿导出 | `docs/images/design/admin-archive.png` |
+| AI 消除 Demo | `docs/images/design/admin-ai-editor.png` |
+| GPT Canvas 工作室 | `docs/images/design/canvas-studio.png` |
+| 领图 | `docs/images/design/workspace-claim.png` |
+| 我的任务 | `docs/images/design/workspace-tasks.png` |
+| 在线编辑器 | `docs/images/design/workspace-editor.png` |
+| 一审队列 | `docs/images/design/review-first.png` |
+| 二审队列 | `docs/images/design/review-second.png` |
+| 审核对比 | `docs/images/design/review-compare.png` |
+
+重新生成截图：
+
+```bash
+bash scripts/capture-design-screenshots.sh
+```
+
+---
+
 ## 与前端实现路由对照
 
 | 设计稿 | 实现路由 |
