@@ -20,7 +20,8 @@ open /Users/timlu/Developer/go-project/ImageDealProject/design/index.html
 | CSV 导入 | `pages/admin-import.html` | 管理员 |
 | 导入批次详情 | `pages/admin-import-detail.html` | 管理员 |
 | 终稿导出 | `pages/admin-archive.html` | 管理员 |
-| AI 消除 Demo | `pages/admin-ai-editor.html` | 管理员（面试演示） |
+| AI 消除 Demo（mock） | `pages/admin-ai-editor.html` | 管理员（面试演示） |
+| GPT 图像消除 · Canvas 工作室 | —（见 `frontend` 实现） | 管理员，路由 `/admin/canvas-studio`，README 含 Demo 截图 |
 | 领图 | `pages/workspace-claim.html` | 用户 |
 | 我的任务 | `pages/workspace-tasks.html` | 用户 |
 | 在线编辑器 | `pages/workspace-editor.html` | 用户 |
