@@ -4,8 +4,9 @@ import "context"
 
 type InpaintInput struct {
 	ImagePNG []byte
-	MaskPNG  []byte
+	MaskPNG  []byte // 可选；空则整图编辑
 	Prompt   string
+	Mode     StudioMode
 }
 
 type InpaintResult struct {

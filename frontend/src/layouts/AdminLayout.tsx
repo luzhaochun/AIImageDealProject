@@ -8,7 +8,7 @@ const items = [
   { key: '/admin/imports', label: <Link to="/admin/imports">CSV 导入</Link> },
   { key: '/admin/archives', label: <Link to="/admin/archives">终稿导出</Link> },
   { key: '/admin/ai-editor', label: <Link to="/admin/ai-editor">AI 消除 Demo</Link> },
-  { key: '/admin/canvas-studio', label: <Link to="/admin/canvas-studio">GPT 图像消除</Link> },
+  { key: '/admin/canvas-studio', label: <Link to="/admin/canvas-studio">GPT 图像工作室</Link> },
 ]
 
 export function AdminLayout() {

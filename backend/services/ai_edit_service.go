@@ -52,10 +52,22 @@ type AiInpaintResponse struct {
 	Message   string `json:"message,omitempty"`
 }
 
-// StudioInpaint Canvas 工作室专用：强制 GPT Image（OpenAI），不使用 mock
-func (s *AiEditService) StudioInpaint(imageData, maskData []byte, prompt string) (*AiInpaintResponse, error) {
-	if !ai.BrushMaskHasEdit(maskData) {
-		return nil, apperr.New("VALIDATION_ERROR", "请用画笔涂抹要消除的区域", apperr.ErrValidation)
+// StudioEdit Canvas 工作室：多模式 GPT Image（OpenAI）
+func (s *AiEditService) StudioEdit(imageData, maskData []byte, prompt, modeStr string) (*AiInpaintResponse, error) {
+	mode, ok := ai.ParseStudioMode(modeStr)
+	if !ok {
+		return nil, apperr.New("VALIDATION_ERROR", "无效的 mode", apperr.ErrValidation)
+	}
+
+	hasMask := ai.BrushMaskHasEdit(maskData)
+	if ai.StudioModeRequiresMask(mode) && !hasMask {
+		meta := ai.AllStudioModes()
+		for _, m := range meta {
+			if m.ID == string(mode) {
+				return nil, apperr.New("VALIDATION_ERROR", m.MaskHint, apperr.ErrValidation)
+			}
+		}
+		return nil, apperr.New("VALIDATION_ERROR", "请用画笔涂抹蒙版区域", apperr.ErrValidation)
 	}
 
 	key, _ := beego.AppConfig.String("openai_api_key")
@@ -71,29 +83,40 @@ func (s *AiEditService) StudioInpaint(imageData, maskData []byte, prompt string)
 		model = "gpt-image-2"
 	}
 
-	src, err := png.Decode(bytes.NewReader(imageData))
-	if err != nil {
-		return nil, err
-	}
-	rgba, err := ai.BrushMaskToRGBA(maskData)
-	if err != nil {
-		return nil, err
-	}
-	openaiMask, err := ai.BuildOpenAIMask(src, rgba)
-	if err != nil {
-		return nil, err
+	var maskForAPI []byte
+	if hasMask {
+		src, err := png.Decode(bytes.NewReader(imageData))
+		if err != nil {
+			return nil, err
+		}
+		rgba, err := ai.BrushMaskToRGBA(maskData)
+		if err != nil {
+			return nil, err
+		}
+		openaiMask, err := ai.BuildOpenAIMask(src, rgba)
+		if err != nil {
+			return nil, err
+		}
+		maskForAPI = openaiMask
 	}
 
+	fullPrompt := ai.BuildStudioPrompt(mode, prompt)
 	provider := newOpenAIProvider(key, model)
 	res, err := provider.Inpaint(context.Background(), ai.InpaintInput{
 		ImagePNG: imageData,
-		MaskPNG:  openaiMask,
-		Prompt:   prompt,
+		MaskPNG:  maskForAPI,
+		Prompt:   fullPrompt,
+		Mode:     mode,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return s.saveInpaintResult(res)
+}
+
+// StudioInpaint 兼容旧接口，等同 erase 模式
+func (s *AiEditService) StudioInpaint(imageData, maskData []byte, prompt string) (*AiInpaintResponse, error) {
+	return s.StudioEdit(imageData, maskData, prompt, string(ai.ModeErase))
 }
 
 func (s *AiEditService) Inpaint(imageData, maskData []byte, prompt string) (*AiInpaintResponse, error) {

@@ -122,10 +122,14 @@ func (o *OpenAIProvider) Inpaint(ctx context.Context, in InpaintInput) (*Inpaint
 		}
 	}
 
+	mode := in.Mode
+	if mode == "" {
+		mode = ModeErase
+	}
 	return &InpaintResult{
 		ImagePNG: imgPNG,
 		Provider: "openai:" + o.Model,
-		Message:  fmt.Sprintf("GPT Image 消除完成 (quality=%s, %dx%d)", quality, outW, outH),
+		Message:  StudioResultMessage(mode, quality, outW, outH),
 	}, nil
 }
 

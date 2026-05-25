@@ -12,7 +12,12 @@ import {
 import { Layer, Rect, Stage, Image as KonvaImage, Transformer } from 'react-konva'
 import type Konva from 'konva'
 import axios from 'axios'
-import { aiStudioInpaint, getAiConfig } from '@/api/aiEditor'
+import { aiStudioEdit, getAiConfig } from '@/api/aiEditor'
+import {
+  AI_STUDIO_MODES,
+  getStudioModeConfig,
+  type AiStudioMode,
+} from '@/constants/aiStudioModes'
 import {
   EXPORT_FORMAT_OPTIONS,
   downloadCanvasAsImage,
@@ -55,11 +60,10 @@ export function KonvaStudioPage() {
   const resultCanvasRef = useRef<HTMLCanvasElement | null>(null)
 
   const [tool, setTool] = useState<Tool>('brush')
+  const [editMode, setEditMode] = useState<AiStudioMode>('erase')
   const [brushSize, setBrushSize] = useState(16)
   const [feather, setFeather] = useState(4)
-  const [prompt, setPrompt] = useState(
-    '移除蒙版区域内的物体，用与周围环境一致的自然背景无缝填充，保持真实照片质感。',
-  )
+  const [prompt, setPrompt] = useState(getStudioModeConfig('erase').default_prompt)
   const [stageSize, setStageSize] = useState({ w: 0, h: 0 })
   const [konvaImage, setKonvaImage] = useState<HTMLImageElement | null>(null)
   const [resultKonvaImage, setResultKonvaImage] = useState<HTMLImageElement | null>(null)
@@ -75,6 +79,17 @@ export function KonvaStudioPage() {
   const drawing = useRef(false)
 
   const { data: cfg } = useQuery({ queryKey: ['ai-config'], queryFn: getAiConfig })
+
+  const studioModes =
+    cfg?.studio_modes?.length ? cfg.studio_modes : AI_STUDIO_MODES
+  const modeConfig =
+    studioModes.find((m) => m.id === editMode) ?? getStudioModeConfig(editMode)
+
+  const handleModeChange = (mode: AiStudioMode) => {
+    setEditMode(mode)
+    const next = studioModes.find((m) => m.id === mode) ?? getStudioModeConfig(mode)
+    setPrompt(next.default_prompt)
+  }
 
   const refreshMaskPreview = useCallback(() => {
     const m = maskCanvasRef.current
@@ -251,7 +266,7 @@ export function KonvaStudioPage() {
 
   const studioReady = cfg?.studio_ready === true
 
-  const runInpaint = async () => {
+  const runStudioEdit = async () => {
     const orig = originalCanvasRef.current
     const mask = maskCanvasRef.current
     if (!orig || !mask) {
@@ -262,20 +277,20 @@ export function KonvaStudioPage() {
       message.error('未配置 GPT Image：请在 backend/conf/app.conf 设置 ai_edit_mode=openai 并填写 openai_api_key，然后重启后端')
       return
     }
-    if (!maskHasPixels(mask)) {
-      message.warning('请用画笔涂抹要消除的区域')
+    const hasMask = maskHasPixels(mask)
+    if (modeConfig.requires_mask && !hasMask) {
+      message.warning(modeConfig.mask_hint)
       return
     }
     setLoading(true)
-    setProviderMsg('正在调用 GPT Image（quality=medium，通常 20–90 秒）…')
+    setProviderMsg(`正在调用 GPT Image · ${modeConfig.label}（quality=medium，通常 20–90 秒）…`)
     const t0 = Date.now()
     try {
-      const maskForApi = feather > 0 ? featherMaskCopy(mask, feather) : mask
+      const maskForApi = hasMask ? (feather > 0 ? featherMaskCopy(mask, feather) : mask) : null
       const apiOrig = downscaleCanvasForApi(orig)
-      const apiMask = downscaleCanvasForApi(maskForApi)
       const imageBlob = await canvasToBlob(apiOrig)
-      const maskBlob = await canvasToBlob(apiMask)
-      const res = await aiStudioInpaint(imageBlob, maskBlob, prompt)
+      const maskBlob = maskForApi ? await canvasToBlob(downscaleCanvasForApi(maskForApi)) : null
+      const res = await aiStudioEdit(imageBlob, maskBlob, prompt, editMode)
       const img = await loadImageFromUrl(res.result_url)
       resultCanvasRef.current = imageToCanvas(img, stageSize.w, stageSize.h)
       setResultKonvaImage(img)
@@ -283,9 +298,9 @@ export function KonvaStudioPage() {
       setShowResult(true)
       setProviderMsg(res.message ?? '')
       const sec = ((Date.now() - t0) / 1000).toFixed(0)
-      message.success(`AI 消除完成 · ${res.provider}（${sec}s）`)
+      message.success(`AI ${modeConfig.label}完成 · ${res.provider}（${sec}s）`)
     } catch (e) {
-      let msg = 'AI 消除失败'
+      let msg = `AI ${modeConfig.label}失败`
       if (axios.isAxiosError(e)) {
         if (!e.response) msg = '无法连接后端，请在 backend 目录执行: go run .'
         else {
@@ -315,7 +330,7 @@ export function KonvaStudioPage() {
     try {
       if (exportFormat === 'psd') {
         if (!hasResult) {
-          message.warning('建议先执行 AI 消除再导出 PSD（当前第 2 图层将使用原图副本）')
+          message.warning(`建议先执行 AI ${modeConfig.label}再导出 PSD（当前第 2 图层将使用原图副本）`)
         }
         downloadPsd({
           width: stageSize.w,
@@ -329,13 +344,13 @@ export function KonvaStudioPage() {
         return
       }
       if (!hasResult) {
-        message.warning('尚未执行 AI 消除，将导出当前画布（与原图相同）')
+        message.warning(`尚未执行 AI ${modeConfig.label}，将导出当前画布（与原图相同）`)
       }
       await downloadCanvasAsImage(result, exportFormat, {
         filename: `imagedeal-studio-${stamp}.${exportFormat === 'jpeg' ? 'jpg' : exportFormat}`,
       })
       const label = EXPORT_FORMAT_OPTIONS.find((o) => o.value === exportFormat)?.label ?? exportFormat
-      message.success(`已导出 ${label}（AI 消除结果）`)
+      message.success(`已导出 ${label}（AI ${modeConfig.label}结果）`)
     } catch (e) {
       message.error(e instanceof Error ? e.message : '导出失败')
     }
@@ -365,7 +380,7 @@ export function KonvaStudioPage() {
         }}
       >
         <Typography.Title level={4} style={{ color: '#fff', margin: 0 }}>
-          GPT 图像消除 · Konva + PSD
+          GPT 图像工作室 · Konva + PSD
         </Typography.Title>
         <Typography.Text style={{ color: studioReady ? '#22c55e' : '#f59e0b' }}>
           {studioReady ? `GPT Image · ${cfg?.model ?? 'gpt-image-2'}` : '未配置 API Key'}
@@ -375,6 +390,20 @@ export function KonvaStudioPage() {
       <div style={{ display: 'grid', gridTemplateColumns: '240px 1fr 220px', minHeight: 560 }}>
         <div style={{ padding: 16, borderRight: '1px solid #334155' }}>
           <Typography.Text strong style={{ color: '#94a3b8' }}>
+            AI 功能
+          </Typography.Text>
+          <Radio.Group
+            value={editMode}
+            onChange={(e) => handleModeChange(e.target.value)}
+            style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 10 }}
+            optionType="button"
+            buttonStyle="solid"
+            options={studioModes.map((m) => ({ label: m.label, value: m.id }))}
+          />
+          <Typography.Text type="secondary" style={{ fontSize: 11, color: '#64748b', display: 'block', marginTop: 8 }}>
+            {modeConfig.mask_hint}
+          </Typography.Text>
+          <Typography.Text strong style={{ color: '#94a3b8', display: 'block', marginTop: 16 }}>
             工具
           </Typography.Text>
           <Radio.Group
@@ -405,12 +434,16 @@ export function KonvaStudioPage() {
             <Slider min={0} max={24} value={feather} onChange={setFeather} />
           </div>
           <Typography.Text style={{ color: '#64748b', fontSize: 12, display: 'block', marginTop: 12 }}>
-            消除提示词（GPT Image）
+            需求描述（GPT Image）
+          </Typography.Text>
+          <Typography.Text type="secondary" style={{ fontSize: 11, color: '#475569', display: 'block' }}>
+            可补充具体要求；留空则使用「{modeConfig.label}」默认说明
           </Typography.Text>
           <Input.TextArea
-            rows={3}
+            rows={4}
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
+            placeholder={modeConfig.default_prompt}
             style={{ marginTop: 6, background: '#1e293b', color: '#e2e8f0' }}
           />
           <Space direction="vertical" style={{ width: '100%', marginTop: 12 }}>
@@ -454,7 +487,7 @@ export function KonvaStudioPage() {
             <Alert
               type="info"
               showIcon
-              message="剪裁后涂蒙版再消除更快。GPT Image 耗时主要在 OpenAI 云端（quality=medium，长边≤1024）。"
+              message={`当前：${modeConfig.label}。消除/去水印/局部修复建议涂蒙版；高清/扩图可整图处理。GPT Image 耗时主要在 OpenAI 云端（quality=medium，长边≤1024）。`}
               style={{ width: '100%', maxWidth: 960 }}
             />
           )}
@@ -570,7 +603,7 @@ export function KonvaStudioPage() {
               <Switch size="small" checked={showOriginal} onChange={setShowOriginal} />
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0' }}>
-              <span style={{ color: hasResult ? '#38bdf8' : '#64748b' }}>AI 消除结果</span>
+              <span style={{ color: hasResult ? '#38bdf8' : '#64748b' }}>AI {modeConfig.label}结果</span>
               <Switch size="small" checked={showResult} onChange={setShowResult} disabled={!hasResult} />
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0' }}>
@@ -579,7 +612,7 @@ export function KonvaStudioPage() {
             </div>
           </div>
           <Typography.Text type="secondary" style={{ fontSize: 11, color: '#64748b', display: 'block', marginTop: 8 }}>
-            PNG/JPEG/WebP 导出 AI 处理结果；PSD 含原图、结果、蒙版三图层
+            PNG/JPEG/WebP 导出 AI 结果；PSD 含原图、{modeConfig.label}结果、蒙版三图层
           </Typography.Text>
           <Space direction="vertical" style={{ width: '100%', marginTop: 24 }}>
             <Button
@@ -588,10 +621,10 @@ export function KonvaStudioPage() {
               size="large"
               icon={<ThunderboltOutlined />}
               loading={loading}
-              onClick={runInpaint}
+              onClick={runStudioEdit}
               disabled={!konvaImage || !studioReady}
             >
-              GPT 消除
+              GPT {modeConfig.label}
             </Button>
             <Select
               value={exportFormat}

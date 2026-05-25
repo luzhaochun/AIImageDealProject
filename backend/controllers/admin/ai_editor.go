@@ -4,6 +4,7 @@ import (
 	"io"
 
 	"backend/controllers"
+	"backend/pkg/ai"
 	"backend/pkg/apperr"
 	"backend/services"
 
@@ -39,36 +40,41 @@ func (c *AiEditorController) Config() {
 		"has_key":      key != "",
 		"model":        model,
 		"studio_ready": studioReady,
+		"studio_modes": ai.AllStudioModes(),
 	})
 }
 
 func (c *AiEditorController) StudioInpaint() {
+	c.studioEdit()
+}
+
+func (c *AiEditorController) StudioEdit() {
+	c.studioEdit()
+}
+
+func (c *AiEditorController) studioEdit() {
 	imageFile, _, err := c.GetFile("image")
 	if err != nil {
 		c.Fail(apperr.New("VALIDATION_ERROR", "请上传图片", apperr.ErrValidation))
 		return
 	}
 	defer imageFile.Close()
-	maskFile, _, err := c.GetFile("mask")
-	if err != nil {
-		c.Fail(apperr.New("VALIDATION_ERROR", "请上传蒙版", apperr.ErrValidation))
-		return
-	}
-	defer maskFile.Close()
 
 	imgData, err := io.ReadAll(imageFile)
 	if err != nil {
 		c.Fail(err)
 		return
 	}
-	maskData, err := io.ReadAll(maskFile)
-	if err != nil {
-		c.Fail(err)
-		return
+
+	var maskData []byte
+	if maskFile, _, err := c.GetFile("mask"); err == nil {
+		defer maskFile.Close()
+		maskData, _ = io.ReadAll(maskFile)
 	}
 
 	prompt := c.GetString("prompt")
-	res, err := (&services.AiEditService{}).StudioInpaint(imgData, maskData, prompt)
+	mode := c.GetString("mode")
+	res, err := (&services.AiEditService{}).StudioEdit(imgData, maskData, prompt, mode)
 	if err != nil {
 		c.Fail(err)
 		return

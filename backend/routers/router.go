@@ -49,6 +49,7 @@ func init() {
 			beego.NSRouter("/config", &admin.AiEditorController{}, "get:Config"),
 			beego.NSRouter("/inpaint", &admin.AiEditorController{}, "post:Inpaint"),
 			beego.NSRouter("/studio-inpaint", &admin.AiEditorController{}, "post:StudioInpaint"),
+			beego.NSRouter("/studio-edit", &admin.AiEditorController{}, "post:StudioEdit"),
 		),
 
 		beego.NSNamespace("/archives",
