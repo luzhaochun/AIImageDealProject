@@ -110,6 +110,12 @@ npm run dev
 | 后端接口 | `POST /api/v1/admin/ai/studio-inpaint` |
 | 实现文件 | `frontend/src/features/admin/konva/KonvaStudioPage.tsx` |
 
+### 界面截图
+
+完整页面（左工具栏 · 中央画布 · 右图层与导出）：
+
+![Canvas 工作室界面](docs/images/canvas-studio/ui-screenshot.png)
+
 ### 页面布局（三栏）
 
 ```
