@@ -5,7 +5,7 @@
 [![OpenAI](https://img.shields.io/badge/GPT_Image-gpt--image--2-412991?logo=openai&logoColor=white)](https://platform.openai.com/)
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 
-**SaaS 图片协作平台** + **GPT 智能消除工作室** — CSV 批量入库、多角色领图作图与审核归档，管理端支持 Konva 蒙版 + OpenAI 图像消除 + PSD 导出。
+**SaaS 图片协作平台** + **GPT 图像工作室** — CSV 批量入库、多角色领图作图与审核归档；管理端 Konva 画布集成 **6 种 AI 功能**（消除、高清增强、修复、换背景、扩图、去水印）及 PSD 导出。
 
 *English → [README.md](README.md)*
 
@@ -14,7 +14,7 @@
 ## 目录
 
 - [核心亮点](#核心亮点)
-- [AI 图像消除](#ai-图像消除)
+- [GPT 图像工作室](#gpt-图像工作室)
 - [团队协作流程](#团队协作流程)
 - [快速开始](#快速开始)
 - [功能与路由](#功能与路由)
@@ -30,7 +30,7 @@
 
 | | |
 |---|---|
-| **GPT 图像消除** | 画笔蒙版 → OpenAI `gpt-image-2` Inpainting → PNG / PSD 三图层导出 |
+| **GPT 图像工作室** | 6 种 AI 模式 · Konva 蒙版 · OpenAI `gpt-image-2` → PNG / PSD 三图层 |
 | **13 步协作流** | CSV 导入 → 入库分类 → 领图作图 → 一审/二审 → 终稿归档 |
 | **多角色 RBAC** | 管理员 / 作图用户 / 审核员，JWT + 路由守卫 |
 | **逻辑图库** | 按 `status` 虚拟队列（待分配、任务区、审核队列、终稿库） |
@@ -40,12 +40,23 @@
 
 ---
 
-<a id="ai-图像消除"></a>
+<a id="gpt-图像工作室"></a>
 
-## AI 图像消除
+## GPT 图像工作室
 
-> **画笔涂蒙版 → GPT 消除 → 图层对比 → 导出**  
-> 管理端 [Canvas 工作室](http://localhost:5173/admin/canvas-studio) · `POST /api/v1/admin/ai/studio-inpaint`
+> **选择 AI 功能 → 涂蒙版（按需）→ GPT 处理 → 图层对比 → 导出**  
+> 管理端 [GPT 图像工作室](http://localhost:5173/admin/canvas-studio) · `POST /api/v1/admin/ai/studio-edit`
+
+### 六种 AI 功能
+
+| 功能 | 蒙版 | 典型场景 |
+|------|:----:|----------|
+| **消除** | 必填 | 去除物体、无缝填充背景 |
+| **高清增强** | 可选 | 整图或局部提升清晰度 |
+| **修复** | 可选 | 划痕、破损、噪点（整图或局部） |
+| **换背景** | 可选 | 替换背景、保留主体 |
+| **扩图** | 可选 | 扩展画布与场景 |
+| **去水印** | 可选 | 标出水印区域或整图处理 |
 
 ### 实机效果（Before → After）
 
@@ -69,9 +80,10 @@
 
 | 能力 | 说明 |
 |------|------|
-| 智能消除 | OpenAI GPT Image（`gpt-image-2`，Images Edits API） |
-| 蒙版编辑 | Konva 画笔 / 橡皮 / 边缘羽化 / 剪裁 |
-| 提示词 | 可自定义消除指令（中文默认已优化） |
+| 多模式 AI | OpenAI GPT Image（`gpt-image-2`，Images Edits API） |
+| 左侧面板 | AI 功能切换、工具（画笔/橡皮/剪裁/移动）、需求描述、上传 |
+| 画布 | 原图 / AI 结果 / 蒙版预览 图层叠放 |
+| 需求描述 | 按模式自带默认文案，可编辑后提交 |
 | 导出 | PNG · JPEG · WebP；**PSD 三图层**（原图 / AI 结果 / 蒙版） |
 | 性能 | 默认 `quality=medium`，长边 ≤ 1024px，通常 20–90 秒/次 |
 
@@ -85,7 +97,7 @@
 
 1. `admin@example.com` / `password123` 登录 → 打开 `/admin/canvas-studio`  
 2. 在 `backend/conf/app.conf` 配置 `openai_api_key`（勿提交 git）并重启后端  
-3. 上传图片 → 红色涂抹要消除区域 → **GPT 消除** → 导出  
+3. 上传图片 → 选择功能（如 **修复**）→ 按需涂蒙版 → **GPT 修复** → 导出  
 
 ```ini
 ai_edit_mode = openai
@@ -156,7 +168,7 @@ cd frontend && npm install && npm run dev
 |------|------|
 | 前端 | http://localhost:5173 |
 | API | http://localhost:8080 · `GET /api/v1/health` |
-| Canvas 工作室 | http://localhost:5173/admin/canvas-studio |
+| GPT 图像工作室 | http://localhost:5173/admin/canvas-studio |
 
 ### 测试账号
 
@@ -164,7 +176,7 @@ cd frontend && npm install && npm run dev
 
 | 邮箱 | 角色 | 入口 |
 |------|------|------|
-| admin@example.com | admin | `/admin` · Canvas 工作室 |
+| admin@example.com | admin | `/admin` · GPT 图像工作室 |
 | user@example.com | user | `/workspace` |
 | reviewer@example.com | reviewer | `/review` |
 
@@ -178,7 +190,7 @@ CSV 样例：`backend/sample/`（`import_sample.csv` 等）· 详见 [backend/sa
 |------|------|------|
 | Admin | `/admin/imports` | CSV 导入与批次 |
 | | `/admin/archives` | 终稿导出 |
-| | `/admin/canvas-studio` | **GPT 图像消除** |
+| | `/admin/canvas-studio` | **GPT 图像工作室**（6 种 AI 功能） |
 | | `/admin/ai-editor` | AI Demo（Mock） |
 | Workspace | `/workspace/claim` | 领图 |
 | | `/workspace/tasks` | 我的任务 |
@@ -221,9 +233,9 @@ AIImageDealProject/
 
 #### 管理员
 
-| CSV 导入 | 批次详情 | 终稿导出 | AI Demo | Canvas 工作室 |
+| CSV 导入 | 批次详情 | 终稿导出 | AI Demo | GPT 图像工作室 |
 |:---:|:---:|:---:|:---:|:---:|
-| ![admin-import](docs/images/design/admin-import.png) | ![detail](docs/images/design/admin-import-detail.png) | ![archive](docs/images/design/admin-archive.png) | ![ai-editor](docs/images/design/admin-ai-editor.png) | ![canvas](docs/images/design/canvas-studio.png) |
+| ![admin-import](docs/images/design/admin-import.png) | ![detail](docs/images/design/admin-import-detail.png) | ![archive](docs/images/design/admin-archive.png) | ![ai-editor](docs/images/design/admin-ai-editor.png) | ![GPT 图像工作室](docs/images/design/canvas-studio.png) |
 
 #### 作图用户
 

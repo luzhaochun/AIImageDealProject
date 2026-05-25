@@ -67,7 +67,7 @@ python3 scripts/generate-readme-assets.py
 1. 启动前后端（见 README 快速开始）
 2. 使用 macOS **⌘ + Shift + 5** 或 [ScreenToGif](https://www.screentogif.com/) / [Kap](https://getkap.co/) 录制：
    - 登录 admin → 打开 `/admin/canvas-studio`
-   - 上传图片 → 画笔涂蒙版 → 点击 GPT 消除 → 切换图层 → 导出
+   - 选择 AI 功能（如修复）→ 按需涂蒙版 → 点击 GPT 处理 → 切换图层 → 导出
 3. 导出为 GIF，建议：
    - 宽度 **800–960px**
    - 时长 **15–30 秒**
@@ -81,7 +81,7 @@ python3 scripts/generate-readme-assets.py
 
 | 资源 | README 位置 |
 |------|-------------|
-| `demo.gif` | [AI 图像消除](https://github.com/luzhaochun/AIImageDealProject#ai-图像消除) |
+| `demo.gif` | [GPT 图像工作室](https://github.com/luzhaochun/AIImageDealProject#gpt-图像工作室)（中文 README） |
 | `social-preview.png` | 本文档 + 需手动上传到 GitHub Settings |
 
 ---

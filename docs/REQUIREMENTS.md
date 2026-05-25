@@ -117,9 +117,9 @@
 | 8–12 审核 | `POST /images/:id/reviews`；`POST /reviews/claim-second` |
 | 13 归档 | `GET /archives`；`POST /archives/:id/complete` |
 
-## 扩展：GPT 图像消除
+## 扩展：GPT 图像工作室
 
-Canvas 工作室（`/admin/canvas-studio`）不纳入主流程状态机，详见 [10-CANVAS-STUDIO.md](./10-CANVAS-STUDIO.md) 与 README AI 专节。
+GPT 图像工作室（`/admin/canvas-studio`）提供 6 种 AI 图像能力，不纳入主流程状态机。详见 [10-CANVAS-STUDIO.md](./10-CANVAS-STUDIO.md) 与 README GPT 专节。
 
 ## 相关文档
 

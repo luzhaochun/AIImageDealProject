@@ -5,7 +5,7 @@
 [![OpenAI](https://img.shields.io/badge/GPT_Image-gpt--image--2-412991?logo=openai&logoColor=white)](https://platform.openai.com/)
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 
-**SaaS image collaboration platform** + **GPT inpainting studio** — bulk CSV import, multi-role claim/edit/review/archive workflow, with Konva masks, OpenAI image removal, and PSD export on the admin side.
+**SaaS image collaboration platform** + **GPT Image Studio** — bulk CSV import, multi-role claim/edit/review/archive workflow; admin Konva canvas with **6 AI modes** (erase, upscale, repair, background, outpaint, watermark) and PSD export.
 
 *简体中文 → [README.zh-CN.md](README.zh-CN.md)*
 
@@ -14,7 +14,7 @@
 ## Table of Contents
 
 - [Highlights](#highlights)
-- [AI Image Inpainting](#ai-image-inpainting)
+- [GPT Image Studio](#gpt-image-studio)
 - [Team Collaboration Workflow](#team-collaboration-workflow)
 - [Quick Start](#quick-start)
 - [Features & Routes](#features--routes)
@@ -30,7 +30,7 @@
 
 | | |
 |---|---|
-| **GPT inpainting** | Brush mask → OpenAI `gpt-image-2` inpainting → PNG / PSD (3 layers) |
+| **GPT Image Studio** | 6 AI modes · Konva mask · OpenAI `gpt-image-2` → PNG / PSD (3 layers) |
 | **13-step workflow** | CSV import → storage & classification → claim & edit → 1st/2nd review → archive |
 | **Multi-role RBAC** | Admin / editor / reviewer, JWT + route guards |
 | **Virtual libraries** | Queues driven by `status` (pending, task area, review queues, final archive) |
@@ -40,12 +40,23 @@
 
 ---
 
-<a id="ai-image-inpainting"></a>
+<a id="gpt-image-studio"></a>
 
-## AI Image Inpainting
+## GPT Image Studio
 
-> **Paint mask → GPT remove → compare layers → export**  
-> Admin [Canvas Studio](http://localhost:5173/admin/canvas-studio) · `POST /api/v1/admin/ai/studio-inpaint`
+> **Pick AI mode → paint mask (optional) → GPT process → compare layers → export**  
+> Admin [GPT Image Studio](http://localhost:5173/admin/canvas-studio) · `POST /api/v1/admin/ai/studio-edit`
+
+### Six AI Modes
+
+| Mode | Mask | Typical use |
+|------|:----:|-------------|
+| **Erase** | Required | Remove objects, seamless fill |
+| **HD upscale** | Optional | Whole-image or local clarity boost |
+| **Repair** | Optional | Scratches, damage, noise (whole or masked) |
+| **Change background** | Optional | Replace background, keep subject |
+| **Outpaint** | Optional | Extend canvas / scene |
+| **Remove watermark** | Optional | Mark watermark area or whole image |
 
 ### Real Results (Before → After)
 
@@ -69,9 +80,10 @@
 
 | Capability | Description |
 |------------|-------------|
-| Smart removal | OpenAI GPT Image (`gpt-image-2`, Images Edits API) |
-| Mask editing | Konva brush / eraser / edge feather / crop |
-| Prompts | Custom inpainting instructions (Chinese default optimized) |
+| Multi-mode AI | OpenAI GPT Image (`gpt-image-2`, Images Edits API) |
+| Left panel | AI mode selector, tools (brush / eraser / crop / move), prompt, upload |
+| Canvas | Original / AI result / mask preview layers |
+| Prompts | Per-mode default prompt; editable before run |
 | Export | PNG · JPEG · WebP; **PSD with 3 layers** (original / AI result / mask) |
 | Performance | Default `quality=medium`, max long edge ≤ 1024px, typically 20–90s per run |
 
@@ -85,7 +97,7 @@
 
 1. Log in as `admin@example.com` / `password123` → open `/admin/canvas-studio`  
 2. Set `openai_api_key` in `backend/conf/app.conf` (do not commit) and restart the backend  
-3. Upload an image → paint red over areas to remove → **GPT Remove** → export  
+3. Upload an image → choose mode (e.g. **Repair**) → paint mask if needed → **GPT Repair** → export  
 
 ```ini
 ai_edit_mode = openai
@@ -178,7 +190,7 @@ Sample CSV files: `backend/sample/` (`import_sample.csv`, etc.) · See [backend/
 |--------|-------|-------------|
 | Admin | `/admin/imports` | CSV import & batches |
 | | `/admin/archives` | Final export |
-| | `/admin/canvas-studio` | **GPT image inpainting** |
+| | `/admin/canvas-studio` | **GPT Image Studio** (6 AI modes) |
 | | `/admin/ai-editor` | AI demo (mock) |
 | Workspace | `/workspace/claim` | Claim image |
 | | `/workspace/tasks` | My tasks |
@@ -221,9 +233,9 @@ Static HTML prototypes (`design/`). Local preview: `open design/index.html` · S
 
 #### Admin
 
-| CSV import | Batch detail | Archive export | AI demo | Canvas Studio |
+| CSV import | Batch detail | Archive export | AI demo | GPT Image Studio |
 |:---:|:---:|:---:|:---:|:---:|
-| ![admin-import](docs/images/design/admin-import.png) | ![detail](docs/images/design/admin-import-detail.png) | ![archive](docs/images/design/admin-archive.png) | ![ai-editor](docs/images/design/admin-ai-editor.png) | ![canvas](docs/images/design/canvas-studio.png) |
+| ![admin-import](docs/images/design/admin-import.png) | ![detail](docs/images/design/admin-import-detail.png) | ![archive](docs/images/design/admin-archive.png) | ![ai-editor](docs/images/design/admin-ai-editor.png) | ![GPT Image Studio](docs/images/design/canvas-studio.png) |
 
 #### Workspace (editors)
 

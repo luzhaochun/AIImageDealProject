@@ -37,7 +37,7 @@ open design/index.html
 | 导入批次详情 | `pages/admin-import-detail.html` | 解析进度、成功/失败数、错误日志 |
 | 终稿导出 | `pages/admin-archive.html` | 筛选终稿库、打包 ZIP 导出 |
 | AI 消除 Demo（mock） | `pages/admin-ai-editor.html` | 画笔蒙版、面试演示（独立于主流程） |
-| GPT Canvas 工作室 | — | 无静态稿；见 `frontend` `/admin/canvas-studio` |
+| GPT 图像工作室 | — | React 实机；见 `frontend` `/admin/canvas-studio`（6 种 AI 功能） |
 
 ### 作图用户 Workspace（3 屏）
 
@@ -71,7 +71,7 @@ open design/index.html
 | 导入批次详情 | `docs/images/design/admin-import-detail.png` |
 | 终稿导出 | `docs/images/design/admin-archive.png` |
 | AI 消除 Demo | `docs/images/design/admin-ai-editor.png` |
-| GPT Canvas 工作室 | `docs/images/design/canvas-studio.png` |
+| GPT 图像工作室 | `docs/images/design/canvas-studio.png` |
 | 领图 | `docs/images/design/workspace-claim.png` |
 | 我的任务 | `docs/images/design/workspace-tasks.png` |
 | 在线编辑器 | `docs/images/design/workspace-editor.png` |
