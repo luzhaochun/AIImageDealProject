@@ -346,11 +346,51 @@ openai_image_max_long = 1024
 - 说明：[docs/09-AI-EDITOR-DEMO.md](docs/09-AI-EDITOR-DEMO.md)
 - 默认 **mock 模式** 无需 API Key；配置 `openai_api_key` 后 mock 与 Canvas 工作室共用同一 Key
 
-## UI 设计稿
+## UI 设计稿（Design）
+
+静态 HTML 原型，用于评审布局与交互示意（无后端联调）。从索引页可跳转各屏：
 
 ```bash
 open design/index.html
 ```
+
+详细说明见 [design/README.md](design/README.md)。
+
+### 页面总览（共 14 屏 + 1 实现专页）
+
+| 分组 | 页面 | 设计稿文件 | 对应实现路由 | 简要说明 |
+|------|------|------------|--------------|----------|
+| **索引** | 设计稿首页 | `design/index.html` | — | 按模块卡片进入各页预览 |
+| **公共** | 登录 | `pages/login.html` | `/login` | 账号密码登录，按角色跳转 |
+| | 工作台首页 | `pages/home.html` | `/` | 登录后概览、快捷入口 |
+| | 403 无权限 | `pages/403.html` | `/403` | 角色无权访问提示 |
+| **管理员** | CSV 导入 | `pages/admin-import.html` | `/admin/imports` | 上传 CSV、批次列表 |
+| | 导入批次详情 | `pages/admin-import-detail.html` | `/admin/imports/:id` | 解析进度、成功/失败、错误日志 |
+| | 终稿导出 | `pages/admin-archive.html` | `/admin/archives` | 筛选终稿库、打包导出 |
+| | AI 消除 Demo | `pages/admin-ai-editor.html` | `/admin/ai-editor` | Mock 蒙版消除（面试演示） |
+| | GPT Canvas 工作室 | *无静态稿* | `/admin/canvas-studio` | React + Konva，见上文专节 |
+| **作图用户** | 领图 | `pages/workspace-claim.html` | `/workspace/claim` | 选类目、查看库存、领取一张 |
+| | 我的任务 | `pages/workspace-tasks.html` | `/workspace/tasks` | 任务列表、状态与操作按钮 |
+| | 在线编辑器 | `pages/workspace-editor.html` | `/workspace/editor/:id` | 图层、工具栏、保存、提审 |
+| **审核员** | 一审队列 | `pages/review-first.html` | `/review/first` | 待一审列表、进入审核 |
+| | 二审队列 | `pages/review-second.html` | `/review/second` | 从一审通过库领取二审 |
+| | 审核对比 | `pages/review-compare.html` | `/review/:id` | 原图 vs 成稿、通过/驳回 |
+
+### 按业务流程对应
+
+```
+公共入口 ──→ 管理员(1·13) ──→ 用户(4-7) ──→ 审核员(8-12)
+ login        CSV导入/详情          领图              一审队列
+ home         终稿导出              我的任务          二审队列
+ 403          AI Demo/Canvas*       在线编辑器        审核对比
+              *Canvas 仅前端实现
+```
+
+### 设计规范
+
+- 样式：`design/css/design-system.css`
+- 主色：`#2563eb` · 布局：左侧导航 + 顶栏 + 内容区（类 Ant Design Pro）
+- 状态标签与 [docs/06-STATE-MACHINE.md](docs/06-STATE-MACHINE.md) 对齐
 
 ## 技术栈
 
