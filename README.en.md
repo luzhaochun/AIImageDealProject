@@ -19,6 +19,8 @@
 
 ## AI Studio (Demo)
 
+![Demo GIF](docs/images/canvas-studio/demo.gif)
+
 | Before | After |
 |:---:|:---:|
 | ![before](docs/images/canvas-studio/demo-sofa-before.png) | ![after](docs/images/canvas-studio/demo-sofa-after.png) |
@@ -26,6 +28,8 @@
 **Route:** `/admin/canvas-studio` · **API:** `POST /api/v1/admin/ai/studio-inpaint`
 
 ![Studio UI](docs/images/canvas-studio/ui-screenshot.png)
+
+**GitHub Social Preview:** upload `docs/images/social-preview.png` in repo Settings → [guide](docs/GITHUB-PREVIEW.md)
 
 Configure `openai_api_key` in `backend/conf/app.conf` (not committed). Details: [docs/10-CANVAS-STUDIO.md](docs/10-CANVAS-STUDIO.md).
 

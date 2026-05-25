@@ -20,6 +20,7 @@
 - [功能与路由](#功能与路由)
 - [UI 设计稿](#ui-设计稿)
 - [文档索引](#文档索引)
+- [GitHub 展示优化](#github-展示优化)
 - [技术栈](#技术栈)
 - [联系方式](#联系方式)
 
@@ -53,6 +54,12 @@
 | ![原图](docs/images/canvas-studio/demo-sofa-before.png) → ![结果](docs/images/canvas-studio/demo-sofa-after.png) | ![原图](docs/images/canvas-studio/demo-cows-before.png) → ![结果](docs/images/canvas-studio/demo-cows-after.png) |
 
 *左：原图 · 右：GPT Image 消除后（实机 API 输出）*
+
+### 操作演示（GIF）
+
+![Canvas 工作室演示](docs/images/canvas-studio/demo.gif)
+
+*Before/After 切换预览；录制真实操作流程见 [docs/GITHUB-PREVIEW.md](docs/GITHUB-PREVIEW.md)*
 
 ### 工作室界面
 
@@ -246,6 +253,26 @@ AIImageDealProject/
 | [docs/07-DEPLOYMENT.md](docs/07-DEPLOYMENT.md) | 部署 |
 
 重新生成设计稿截图：`bash scripts/capture-design-screenshots.sh`
+
+---
+
+## GitHub 展示优化
+
+在 GitHub 上分享仓库时，建议完成以下设置，提升点击率与专业度：
+
+| 项 | 文件 | 操作 |
+|----|------|------|
+| **Social Preview 封面** | `docs/images/social-preview.png` | 仓库 **Settings → General → Social preview** 上传该图（1280×640） |
+| **演示 GIF** | `docs/images/canvas-studio/demo.gif` | 已嵌入 README；可替换为实机录屏 |
+
+一键重新生成封面与 GIF（基于现有 Demo 图）：
+
+```bash
+pip3 install Pillow
+python3 scripts/generate-readme-assets.py
+```
+
+完整说明（含实机录屏步骤）：[docs/GITHUB-PREVIEW.md](docs/GITHUB-PREVIEW.md)
 
 ---
 
