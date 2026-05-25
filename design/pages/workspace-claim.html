@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>领图 — ImageDeal</title>
+  <link rel="stylesheet" href="../css/design-system.css" />
+</head>
+<body>
+  <div class="badge-prototype">设计稿 · 领图</div>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">Image<span>Deal</span></div>
+      <div class="sidebar-role">作图用户</div>
+      <nav class="sidebar-nav">
+        <a href="workspace-claim.html" class="active">领图</a>
+        <a href="workspace-tasks.html">我的任务</a>
+      </nav>
+    </aside>
+    <div class="main">
+      <header class="topbar"><span class="topbar-title">领图</span></header>
+      <div class="content">
+        <div class="page-header">
+          <h1>领取图片</h1>
+          <p>从原图库按类目领取一张，系统自动分配全局编号 global_no</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">选择类目</div>
+            <div class="table-wrap" style="border:none">
+              <table>
+                <thead><tr><th>类目</th><th>可领数量</th><th></th></tr></thead>
+                <tbody>
+                  <tr style="background:var(--primary-light)">
+                    <td><strong>banner</strong></td><td>42</td>
+                    <td><button class="btn btn-primary btn-sm">领取一张</button></td>
+                  </tr>
+                  <tr>
+                    <td>poster</td><td>18</td>
+                    <td><button class="btn btn-default btn-sm">领取一张</button></td>
+                  </tr>
+                  <tr>
+                    <td>social</td><td>0</td>
+                    <td><span style="color:var(--text-secondary);font-size:13px">暂无库存</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">
+              每日换图上限 10 次 · 进行中任务上限 5 个
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">领图说明</div>
+            <ul style="padding-left:20px;font-size:13px;color:var(--text-secondary);line-height:1.8">
+              <li>领取后图片进入「我的任务」，状态为已领取</li>
+              <li>若原图不可用，可「换图」废弃当前图并重新领取</li>
+              <li>废弃图片进入废料堆，不可再次领取</li>
+            </ul>
+            <div class="alert alert-warning" style="margin-top:16px">
+              换图将记录原因并计入每日限额
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">最近领取</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>编号</th><th>类目</th><th>时间</th><th>状态</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>ACME-20260523-000042</td><td>banner</td><td>刚刚</td>
+                  <td><span class="tag tag-processing">已领取</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

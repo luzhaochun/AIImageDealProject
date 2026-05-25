@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI 消除 Demo — ImageDeal Admin</title>
+  <link rel="stylesheet" href="../css/design-system.css" />
+  <style>
+    .ai-shell { background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+    .ai-shell .sidebar { background: #1e293b; border-color: #334155; }
+    .ai-shell .sidebar-brand, .ai-shell .sidebar-nav a { color: #e2e8f0; }
+    .ai-shell .sidebar-nav a.active { background: #2563eb; color: #fff; }
+    .ai-shell .topbar { background: #1e293b; border-color: #334155; color: #fff; }
+    .ai-shell .content { padding: 0; }
+    .ai-grid { display: grid; grid-template-columns: 220px 1fr 240px; min-height: calc(100vh - 56px); }
+    .ai-panel { padding: 16px; border-right: 1px solid #334155; }
+    .ai-panel-right { border-right: none; border-left: 1px solid #334155; }
+    .ai-label { font-size: 12px; color: #94a3b8; margin-bottom: 8px; display: block; }
+    .ai-canvas-wrap {
+      margin: 16px auto; max-width: 900px; position: relative;
+      background: #1e293b; border-radius: 8px; min-height: 400px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ai-canvas-placeholder { color: #64748b; font-size: 14px; }
+    .ai-mask-hint {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 120px; height: 120px; border: 3px solid #ef4444; border-radius: 50%;
+      opacity: 0.7; pointer-events: none;
+    }
+    .ai-result { margin: 0 16px 16px; max-width: 900px; }
+    .ai-result img { width: 100%; border-radius: 8px; margin-top: 8px; }
+    .tool-toggle { display: flex; gap: 8px; margin-bottom: 16px; }
+    .tool-toggle .btn { flex: 1; }
+    .slider-row { margin-bottom: 16px; }
+    .slider-track { height: 4px; background: #334155; border-radius: 2px; margin-top: 8px; }
+    .slider-fill { height: 100%; background: #2563eb; border-radius: 2px; width: 35%; }
+  </style>
+</head>
+<body class="ai-shell">
+  <div class="badge-prototype">设计稿 · AI 消除面试 Demo</div>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">Image<span>Deal</span></div>
+      <div class="sidebar-role">管理员</div>
+      <nav class="sidebar-nav">
+        <a href="admin-import.html">CSV 导入</a>
+        <a href="admin-archive.html">终稿导出</a>
+        <a href="admin-ai-editor.html" class="active">AI 消除 Demo</a>
+      </nav>
+    </aside>
+    <div class="main">
+      <header class="topbar">
+        <span class="topbar-title">AI 消除 · 面试 Demo</span>
+        <span style="font-size:12px;color:#64748b">模式：mock · 无需 API Key</span>
+      </header>
+      <div class="content">
+        <div class="ai-grid">
+          <div class="ai-panel">
+            <span class="ai-label">工具</span>
+            <div class="tool-toggle">
+              <button class="btn btn-primary btn-sm">画笔</button>
+              <button class="btn btn-default btn-sm" style="background:#334155;color:#e2e8f0;border-color:#475569">橡皮</button>
+            </div>
+            <div class="slider-row">
+              <span class="ai-label">笔刷大小 24px</span>
+              <div class="slider-track"><div class="slider-fill"></div></div>
+            </div>
+            <div class="slider-row">
+              <span class="ai-label">边缘羽化 10px</span>
+              <div class="slider-track"><div class="slider-fill" style="width:25%"></div></div>
+            </div>
+            <span class="ai-label">消除提示词（可选）</span>
+            <textarea class="form-textarea" rows="3" placeholder="描述要填充的背景内容…" style="background:#1e293b;color:#e2e8f0;border-color:#475569"></textarea>
+            <button class="btn btn-default btn-sm" style="width:100%;margin-top:12px;background:#334155;color:#e2e8f0">清除蒙版</button>
+            <button class="btn btn-default btn-sm" style="width:100%;margin-top:8px;background:#334155;color:#e2e8f0">上传图片</button>
+          </div>
+
+          <div>
+            <div class="alert alert-info" style="margin:16px;background:#1e3a5f;border-color:#2563eb;color:#93c5fd">
+              用红色画笔圈选要消除的区域，点击右侧「AI 消除」
+            </div>
+            <div class="ai-canvas-wrap">
+              <span class="ai-canvas-placeholder">[ 画布：原图 + 红色蒙版 ]</span>
+              <div class="ai-mask-hint"></div>
+            </div>
+            <div class="ai-result">
+              <span class="ai-label">AI 消除结果（示例）</span>
+              <div style="background:#334155;height:180px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#64748b">
+                消除刀叉后的披萨图
+              </div>
+            </div>
+          </div>
+
+          <div class="ai-panel ai-panel-right">
+            <span class="ai-label">图层</span>
+            <div style="font-size:13px;margin-top:8px">
+              <div style="padding:8px 0;border-bottom:1px solid #334155">☑ 蒙版</div>
+              <div style="padding:8px 0;color:#38bdf8">AI 消除结果</div>
+              <div style="padding:8px 0">原图</div>
+            </div>
+            <button class="btn btn-primary" style="width:100%;margin-top:24px;padding:12px">✨ AI 消除</button>
+            <button class="btn btn-default btn-sm" style="width:100%;margin-top:8px;background:#334155;color:#e2e8f0">下载结果</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

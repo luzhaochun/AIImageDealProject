@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>登录 — ImageDeal</title>
+  <link rel="stylesheet" href="../css/design-system.css" />
+</head>
+<body>
+  <div class="badge-prototype">设计稿 · 登录</div>
+  <a href="../index.html" style="position:fixed;top:12px;left:12px;font-size:13px">← 返回索引</a>
+
+  <div class="login-page">
+    <div class="login-card">
+      <div class="login-logo">Image<span>Deal</span></div>
+      <p class="login-sub">SaaS 图片协作平台 · 请登录您的账号</p>
+
+      <form onsubmit="return false">
+        <div class="form-group">
+          <label class="form-label">邮箱</label>
+          <input class="form-input" type="email" placeholder="name@company.com" value="zhangsan@example.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">密码</label>
+          <input class="form-input" type="password" placeholder="请输入密码" value="••••••••" />
+        </div>
+        <div class="form-group">
+          <label class="form-label"><input type="checkbox" checked /> 记住我</label>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;padding:12px">登 录</button>
+      </form>
+
+      <p style="margin-top:24px;font-size:12px;color:var(--text-secondary);text-align:center">
+        登录后按角色跳转：管理员 → 导入 · 用户 → 任务区 · 审核员 → 一审队列
+      </p>
+    </div>
+  </div>
+</body>
+</html>

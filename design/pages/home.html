@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>工作台 — ImageDeal</title>
+  <link rel="stylesheet" href="../css/design-system.css" />
+</head>
+<body>
+  <div class="badge-prototype">设计稿 · 首页</div>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">Image<span>Deal</span></div>
+      <div class="sidebar-role">作图用户 · 张三</div>
+      <nav class="sidebar-nav">
+        <a href="home.html" class="active">工作台</a>
+        <a href="workspace-claim.html">领图</a>
+        <a href="workspace-tasks.html">我的任务</a>
+      </nav>
+      <div class="sidebar-footer"><a href="login.html">退出登录</a></div>
+    </aside>
+    <div class="main">
+      <header class="topbar">
+        <span class="topbar-title">工作台</span>
+        <div class="topbar-user">租户：ACME · zhangsan@example.com</div>
+      </header>
+      <div class="content">
+        <div class="page-header">
+          <h1>你好，张三</h1>
+          <p>今日待处理任务与平台运行概览</p>
+        </div>
+        <div class="grid-4" style="margin-bottom:24px">
+          <div class="stat-card"><div class="stat-label">进行中</div><div class="stat-value">3</div></div>
+          <div class="stat-card"><div class="stat-label">待一审</div><div class="stat-value">1</div></div>
+          <div class="stat-card"><div class="stat-label">已驳回</div><div class="stat-value" style="color:var(--error)">1</div></div>
+          <div class="stat-card"><div class="stat-label">本月完成</div><div class="stat-value">28</div></div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">快捷操作</div>
+            <div class="btn-group">
+              <a href="workspace-claim.html" class="btn btn-primary">去领图</a>
+              <a href="workspace-tasks.html" class="btn btn-default">我的任务</a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">系统状态</div>
+            <p style="font-size:13px;color:var(--text-secondary)">MySQL · Redis · MinIO 均正常</p>
+            <span class="tag tag-success">服务正常</span>
+          </div>
+        </div>
+        <div class="card" style="margin-top:16px">
+          <div class="card-title">最近动态</div>
+          <div class="table-wrap" style="border:none">
+            <table>
+              <thead><tr><th>编号</th><th>操作</th><th>时间</th></tr></thead>
+              <tbody>
+                <tr><td>ACME-20260523-000041</td><td>提交一审</td><td>10 分钟前</td></tr>
+                <tr><td>ACME-20260523-000038</td><td>一审驳回 · 需修改文字大小</td><td>2 小时前</td></tr>
+                <tr><td>ACME-20260523-000035</td><td>领取图片 · banner</td><td>昨天 16:20</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

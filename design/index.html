@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ImageDeal — UI 设计稿索引</title>
+  <link rel="stylesheet" href="css/design-system.css" />
+</head>
+<body>
+  <div class="badge-prototype">静态设计稿 · 非最终实现</div>
+  <div class="gallery">
+    <h1>ImageDeal <span style="color:var(--primary)">UI 设计稿</span></h1>
+    <p class="gallery-intro">
+      SaaS 图片协作平台完整页面原型，覆盖 13 步业务流程：CSV 导入 → 入库分类 → 领图作图 → 一审/二审 → 终稿归档。
+      点击下方卡片在浏览器中预览各页面布局与交互示意（无后端联调）。
+    </p>
+
+    <div class="flow-diagram">
+      <strong style="display:block;margin-bottom:12px">业务流程（13 步）</strong>
+      <div class="flow-steps">
+        <span class="flow-step">1 导入</span><span class="flow-arrow">→</span>
+        <span class="flow-step">2 入库</span><span class="flow-arrow">→</span>
+        <span class="flow-step">3 分类</span><span class="flow-arrow">→</span>
+        <span class="flow-step">4 领图</span><span class="flow-arrow">→</span>
+        <span class="flow-step">5 换图</span><span class="flow-arrow">→</span>
+        <span class="flow-step">6 作图</span><span class="flow-arrow">→</span>
+        <span class="flow-step">7 提审</span><span class="flow-arrow">→</span>
+        <span class="flow-step">8-10 一审</span><span class="flow-arrow">→</span>
+        <span class="flow-step">11-12 二审</span><span class="flow-arrow">→</span>
+        <span class="flow-step">13 归档</span>
+      </div>
+    </div>
+
+    <section class="gallery-section">
+      <h2>公共</h2>
+      <div class="gallery-grid">
+        <a class="gallery-card" href="pages/login.html" style="text-decoration:none;color:inherit">
+          <h3>登录页</h3>
+          <p>账号密码登录，按角色进入不同工作台</p>
+          <span class="btn btn-primary btn-sm">预览</span>
+        </a>
+        <a class="gallery-card" href="pages/home.html">
+          <h3>工作台首页</h3>
+          <p>登录后概览：待办统计、快捷入口、系统状态</p>
+          <span class="btn btn-primary btn-sm">预览</span>
+        </a>
+        <a class="gallery-card" href="pages/403.html">
+          <h3>403 无权限</h3>
+          <p>角色无权访问时的提示页</p>
+          <span class="btn btn-primary btn-sm">预览</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="gallery-section">
+      <h2>管理员 Admin</h2>
+      <div class="gallery-grid">
+        <a class="gallery-card" href="pages/admin-import.html">
+          <h3>CSV 导入</h3>
+          <p>上传 CSV、批次列表、导入进度</p>
+          <span class="btn btn-primary btn-sm">预览</span>
+        </a>
+        <a class="gallery-card" href="pages/admin-import-detail.html">
+          <h3>导入批次详情</h3>
+          <p>解析进度、成功/失败数、错误日志下载</p>
+          <span class="btn btn-primary btn-sm">预览</span>
+        </a>
+        <a class="gallery-card" href="pages/admin-archive.html">
+          <h3>终稿导出</h3>
+          <p>按条件筛选终稿库、打包 ZIP 导出</p>
+          <span class="btn btn-primary btn-sm">预览</span>
+        </a>
+        <a class="gallery-card" href="pages/admin-ai-editor.html">
+          <h3>AI 消除 Demo</h3>
+          <p>画笔蒙版、GPT Image 消除、面试演示（独立于业务流程）</p>
+          <span class="btn btn-primary btn-sm">预览</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="gallery-section">
+      <h2>作图用户 Workspace</h2>
+      <div class="gallery-grid">
+        <a class="gallery-card" href="pages/workspace-claim.html">
+          <h3>领图</h3>
+          <p>按类目查看库存、领取一张、换图说明</p>
+          <span class="btn btn-primary btn-sm">预览</span>
+        </a>
+        <a class="gallery-card" href="pages/workspace-tasks.html">
+          <h3>我的任务</h3>
+          <p>任务列表、状态筛选、操作按钮随状态变化</p>
+          <span class="btn btn-primary btn-sm">预览</span>
+        </a>
+        <a class="gallery-card" href="pages/workspace-editor.html">
+          <h3>在线编辑器</h3>
+          <p>图层、工具栏、保存、提交审核</p>
+          <span class="btn btn-primary btn-sm">预览</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="gallery-section">
+      <h2>审核员 Review</h2>
+      <div class="gallery-grid">
+        <a class="gallery-card" href="pages/review-first.html">
+          <h3>一审队列</h3>
+          <p>待一审列表、领取/进入审核</p>
+          <span class="btn btn-primary btn-sm">预览</span>
+        </a>
+        <a class="gallery-card" href="pages/review-second.html">
+          <h3>二审队列</h3>
+          <p>从一审通过库抽样领取</p>
+          <span class="btn btn-primary btn-sm">预览</span>
+        </a>
+        <a class="gallery-card" href="pages/review-compare.html">
+          <h3>审核对比</h3>
+          <p>原图 vs 成稿、通过/驳回、审核意见</p>
+          <span class="btn btn-primary btn-sm">预览</span>
+        </a>
+      </div>
+    </section>
+
+    <p style="margin-top:40px;font-size:13px;color:var(--text-secondary)">
+      设计说明文档：<code>docs/03-FRONTEND.md</code> · API 契约：<code>docs/05-API.md</code>
+    </p>
+  </div>
+</body>
+</html>

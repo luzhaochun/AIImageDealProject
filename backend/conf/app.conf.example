@@ -1,0 +1,18 @@
+appname = imagedeal
+httpport = 8080
+runmode = dev
+copyrequestbody = true
+EnableDocs = true
+
+sqlconn = root:123456@tcp(127.0.0.1:3306)/imagedeal?charset=utf8mb4&parseTime=True&loc=Local
+redis_addr = localhost:6379
+storage_dir = storage
+
+jwt_secret = imagedeal-dev-secret-change-in-prod
+jwt_expire_hours = 24
+
+ai_edit_mode = openai
+openai_api_key =
+openai_image_model = gpt-image-2
+openai_image_quality = medium
+openai_image_max_long = 1024

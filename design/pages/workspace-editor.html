@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>编辑器 — ACME-20260523-000042</title>
+  <link rel="stylesheet" href="../css/design-system.css" />
+</head>
+<body>
+  <div class="badge-prototype">设计稿 · 编辑器</div>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">Image<span>Deal</span></div>
+      <nav class="sidebar-nav">
+        <a href="workspace-tasks.html">← 返回任务</a>
+      </nav>
+    </aside>
+    <div class="main">
+      <header class="topbar">
+        <span class="topbar-title">ACME-20260523-000042 · banner</span>
+        <div class="topbar-user">
+          <span class="tag tag-processing">作图中</span>
+          <span>自动保存 · 2 秒前</span>
+        </div>
+      </header>
+      <div class="content" style="padding:0">
+        <div class="editor-toolbar">
+          <button class="btn btn-default btn-sm">裁剪</button>
+          <button class="btn btn-default btn-sm">文字</button>
+          <button class="btn btn-default btn-sm">调色</button>
+          <button class="btn btn-default btn-sm">撤销</button>
+          <button class="btn btn-default btn-sm">重做</button>
+          <span style="flex:1"></span>
+          <button class="btn btn-default">保存版本</button>
+          <button class="btn btn-primary">提交审核</button>
+        </div>
+        <div class="editor-layout" style="border-radius:0;border-left:none;border-right:none">
+          <div class="editor-sidebar">
+            <div class="card-title" style="font-size:13px">图层</div>
+            <ul style="list-style:none;font-size:13px">
+              <li style="padding:8px;background:var(--primary-light);border-radius:4px;margin-bottom:4px">📝 文字层 · 标题</li>
+              <li style="padding:8px;margin-bottom:4px">🖼 装饰层</li>
+              <li style="padding:8px;margin-bottom:4px;background:#f1f5f9;border-radius:4px">🖼 背景图（原图）</li>
+            </ul>
+            <div style="margin-top:20px;font-size:12px;color:var(--text-secondary)">
+              <p><strong>版本</strong> v3（当前）</p>
+              <p>v2 · 10:20</p>
+              <p>v1 · 09:05</p>
+            </div>
+            <button class="btn btn-default btn-sm" style="width:100%;margin-top:12px">换图（废弃）</button>
+          </div>
+          <div>
+            <div class="editor-canvas" style="min-height:480px">
+              [ Konva 画布区域 · 1920×1080 ]
+              <div style="position:absolute;bottom:16px;right:16px;font-size:12px;background:rgba(0,0,0,0.5);padding:4px 8px;border-radius:4px">
+                缩放 75%
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:16px 24px;background:var(--card);border-top:1px solid var(--border)">
+          <div class="alert alert-info" style="margin:0">
+            提交审核前请确认成稿符合规范。提交后进入一审队列，状态变为「待一审」。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

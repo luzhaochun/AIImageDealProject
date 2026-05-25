@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>一审队列 — ImageDeal</title>
+  <link rel="stylesheet" href="../css/design-system.css" />
+</head>
+<body>
+  <div class="badge-prototype">设计稿 · 一审</div>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">Image<span>Deal</span></div>
+      <div class="sidebar-role">审核员</div>
+      <nav class="sidebar-nav">
+        <a href="review-first.html" class="active">一审队列</a>
+        <a href="review-second.html">二审队列</a>
+      </nav>
+    </aside>
+    <div class="main">
+      <header class="topbar"><span class="topbar-title">一审队列</span><div class="topbar-user">待审 12 张</div></header>
+      <div class="content">
+        <div class="page-header">
+          <h1>待一审</h1>
+          <p>用户已提交成稿，请对照原图审核通过或驳回</p>
+        </div>
+
+        <div class="grid-3" style="margin-bottom:16px">
+          <div class="stat-card"><div class="stat-label">队列中</div><div class="stat-value">12</div></div>
+          <div class="stat-card"><div class="stat-label">今日已审</div><div class="stat-value">45</div></div>
+          <div class="stat-card"><div class="stat-label">通过率</div><div class="stat-value">92%</div></div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>缩略图</th><th>编号</th><th>类目</th><th>提交人</th>
+                <th>提交时间</th><th>版本</th><th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="thumb"></div></td>
+                <td>ACME-20260522-000031</td>
+                <td>banner</td>
+                <td>张三</td>
+                <td>30 分钟前</td>
+                <td>v2</td>
+                <td><a href="review-compare.html" class="btn btn-primary btn-sm">开始审核</a></td>
+              </tr>
+              <tr>
+                <td><div class="thumb"></div></td>
+                <td>ACME-20260522-000029</td>
+                <td>poster</td>
+                <td>李四</td>
+                <td>1 小时前</td>
+                <td>v1</td>
+                <td><a href="review-compare.html" class="btn btn-primary btn-sm">开始审核</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

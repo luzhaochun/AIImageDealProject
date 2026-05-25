@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>审核 — ACME-20260522-000031</title>
+  <link rel="stylesheet" href="../css/design-system.css" />
+</head>
+<body>
+  <div class="badge-prototype">设计稿 · 审核对比</div>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">Image<span>Deal</span></div>
+      <nav class="sidebar-nav">
+        <a href="review-first.html">← 返回队列</a>
+      </nav>
+    </aside>
+    <div class="main">
+      <header class="topbar">
+        <span class="topbar-title">一审 · ACME-20260522-000031</span>
+        <span class="tag tag-warning">待一审</span>
+      </header>
+      <div class="content">
+        <div class="page-header" style="margin-bottom:16px">
+          <h1>原图 vs 成稿对比</h1>
+          <p>提交人：张三 · 版本 v2 · banner · 提交于 30 分钟前</p>
+        </div>
+
+        <div class="compare-grid" style="margin-bottom:24px">
+          <div class="compare-panel">
+            <div class="compare-panel-header">原图（只读）</div>
+            <div class="compare-panel-body">[ 原图预览 1200×600 ]</div>
+          </div>
+          <div class="compare-panel">
+            <div class="compare-panel-header">成稿（当前版本 v2）</div>
+            <div class="compare-panel-body">[ 成稿预览 1920×1080 ]</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="form-group">
+            <label class="form-label">审核意见</label>
+            <textarea class="form-textarea" placeholder="通过可留空；驳回请填写修改建议，将退回用户任务区"></textarea>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-success">通过</button>
+            <button class="btn btn-danger">驳回</button>
+            <button class="btn btn-default">暂存</button>
+          </div>
+          <p style="margin-top:12px;font-size:12px;color:var(--text-secondary)">
+            通过 → 一审通过库 · 驳回 → 用户任务区（状态已驳回，显示意见）
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">历史审核记录</div>
+          <div class="empty-state" style="padding:24px">首次审核，无历史记录</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
