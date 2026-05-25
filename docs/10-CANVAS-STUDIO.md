@@ -2,7 +2,7 @@
 
 管理端：`/admin/canvas-studio`（本地 http://localhost:5173/admin/canvas-studio）
 
-**Demo 截图与功能说明**：见根目录 [README.md#ai-图像消除](../README.md#ai-图像消除)。
+**Demo 与说明**：[README.md#ai-image-inpainting](../README.md#ai-image-inpainting)（EN）· [README.zh-CN.md#ai-图像消除](../README.zh-CN.md#ai-图像消除)（中文）
 
 ## 技术栈
 

@@ -2,7 +2,7 @@
 
 > 完整业务流程与实现对照。README 为产品首页，本文档供产品评审与开发对齐。
 
-[← 返回 README](../README.md)
+[← README (EN)](../README.md) · [中文 README](../README.zh-CN.md)
 
 ---
 
